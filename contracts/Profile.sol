@@ -25,12 +25,11 @@ contract Profile is ERC721Enumerable, Ownable, EIP712 {
         require(from == address(0), "Transfer is not allowance");
     }
 
-    function mint(address[] memory users, bytes32[] memory initMerkleRoots) external onlyOwner {
+    function mint(address[] memory users, uint256[] memory tokenIds, bytes32[] memory initMerkleRoots) external onlyOwner {
         for (uint i = 0; i < users.length; i++) {
             require(balanceOf(users[i]) == 0, "Only one NFT per user");
-            uint256 currentIndex = totalSupply();
-            merkleRoots[currentIndex + 1] = initMerkleRoots[i];
-            _safeMint(users[i], currentIndex + 1);
+            merkleRoots[tokenIds[i]] = initMerkleRoots[i];
+            _safeMint(users[i], tokenIds[i]);
         }
     } 
 
