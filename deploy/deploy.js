@@ -10,6 +10,7 @@ const main = async (hre) => {
         args
     })
 
+
     console.log("Profile address", profileResponse.address)
 }
 
